@@ -21,14 +21,23 @@ const App = (props) => {
     setPoints(copy)
   }
 
+  const mostVoted = () => {
+    let maxIndex = points.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+    return anecdotes[maxIndex]
+  }
+
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       {props.anecdotes[selected]}
       <br/>
-      <span>has {points[selected]} votes</span>
+      has {points[selected]} votes
       <br/>
       <Button handleClick={addVote} text='vote' />
       <Button handleClick={showRandom} text='next anecdote' />
+      <br/>
+      <h2>Anecdote with most votes</h2>
+      {mostVoted()}
     </div>
   )
 }
